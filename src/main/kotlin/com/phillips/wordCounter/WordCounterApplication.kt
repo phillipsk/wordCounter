@@ -25,7 +25,6 @@ fun main(args: Array<String>) {
 @RestController
 class WordCountController(
     private val service: MessageService,
-//    private val suspendRepo: SuspendRepository
 ) {
 
     @PostMapping("/wordCount")
@@ -35,7 +34,6 @@ class WordCountController(
         return if (records.isEmpty()) {
             val wordRecord = cleanRequest(wordEntity)
             updateDb(wordRecord)
-    //        updateDbSuspend(wordRecord)
             val dbCount = getWordCountSum()
             ResponseEntity(WordResponse(dbCount), HttpStatus.OK)
         } else {
@@ -50,10 +48,6 @@ class WordCountController(
 
     private fun updateDb(wordRecord: WordRecord) {
         service.post(wordRecord)
-    }
-
-    private suspend fun updateDbSuspend(wordRecord: WordRecord) {
-//        suspendRepo.save(wordRecord)
     }
 
     private fun getWordCountSum(): Int {
@@ -87,12 +81,3 @@ class MessageService(val db: MessageRepository) {
     fun post(message: WordRecord) = db.save(message)
     fun getById(entityId: Int) = db.findMessagesById(entityId)
 }
-
-//interface SuspendRepository : CoroutineCrudRepository<WordRecord, Int> {
-//    @Query("SELECT * FROM messages")
-//    suspend fun getAll(): WordRecord
-//    //    suspend fun getAll(): Flow<WordRecord>
-//
-//    @Query("sum word_count from messages")
-//    suspend fun findMessagesSum(): Int
-//}
