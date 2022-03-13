@@ -1,0 +1,4 @@
+CREATE TABLE messages (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    WORD_COUNT                       INTEGER NULL
+);
