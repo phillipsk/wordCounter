@@ -15,7 +15,7 @@ import reactor.kafka.sender.SenderOptions
 @Configuration
 class KafkaConfig() {
 
-    private val topicList = listOf("wordCount-topic")
+    private val topicList = listOf(wordEntityTopic)
     private val configMap = mapOf(
         ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to "localhost:9092",
         ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringSerializer::class.java,
